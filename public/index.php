@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Challenge Ingreso Career Switch: DeFI-Solidity</h1>
+    <h2>by Luciano Bertrán Engelmann - bertranluciano@gmail.com</h2>
     <h3>Modo de uso de la API</h3>
     <p>Hacer una petición de tipo GET a https://challenge-ingreso-lbertran.herokuapp.com/api.php?email=mail-de-prueba</p>
     <p>donde mail-de-prueba debe ser reemplazado por el mail que se quiera corroborar.</p>
