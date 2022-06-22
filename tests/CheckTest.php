@@ -32,9 +32,9 @@ class CheckTest extends TestCase{
             "7j6QFZ7RExqXO2Zzfqqx2sd9RwPyDLdZedZoK2gsUzvUd7BvGdlXZpzyXFjobDiwoXk3Viaku2ghsf3kGKft0oVCUTlvUZ9PiNqI"
         ];
 
-        $resultado = check($blocks, $token);
+        /* $resultado = check($blocks, $token);
 
-        $this->assertEquals(true, $resultado);
+        $this->assertEquals(true, $resultado); */
 
     }
 
@@ -48,12 +48,23 @@ class CheckTest extends TestCase{
         $response = $this->getMockedClient()->request('GET', '/blocks?token=' . $token);
         $body     = (string) $response->getBody();
         $blocks  = json_decode($body, true)['data'];
-        /*
-        $response = $this->getMockedClient()->request('GET', '/check',$requestData);
+        
+        $requestData = [
+            'query' => [
+                'token' => $token
+            ],
+            'json' => ["blocks" => [
+                'qwer',
+                'zcvf'
+              ]],
+        ];
+
+        $response = $this->getMockedClient()->request('POST', '/check', $requestData);
         $body     = (string) $response->getBody();
         $message  = json_decode($body, true)['message'];
         
-        print_r($message); */
+        print_r($message); 
+
         $arreglo_ordenado = $this->check($blocks, $token);
 
         $this->assertEquals($expected, $arreglo_ordenado);
@@ -150,7 +161,7 @@ class CheckTest extends TestCase{
         $handlerBuilder->addRoute(
             $cb->new()
                 ->withMethod('POST')
-                ->withPath('/check/false')
+                ->withPath('/check')
                 ->withConditionalResponse('{"blocks":["qwer","zcvf"]}', new Response(200, [], '{"message":"true"}'))
                 ->withConditionalResponse('{"blocks":["zcvf","uhgt"]}', new Response(200, [], '{"message":"true"}'))
                 ->withConditionalResponse('{"blocks":["uhgt","asdf"]}', new Response(200, [], '{"message":"true"}'))
