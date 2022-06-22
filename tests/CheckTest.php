@@ -27,7 +27,5 @@ class CheckTest extends TestCase{
     }
 }
 
-/*
-./vendor/bin/phpunit tests
-*/
+
 ?>
