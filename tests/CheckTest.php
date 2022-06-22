@@ -11,7 +11,32 @@ use GuzzleHttp\Psr7\Response;
 use Http\Discovery\Psr17FactoryDiscovery;
 use PHPUnit\Framework\TestCase;
 
+include('public/check.php');
+require_once('vendor/autoload.php');
+
 class CheckTest extends TestCase{
+
+    public function testCheck(): void
+    {
+        $token = 'c7a041f1-351e-4f1f-81b1-04373d4a501d';
+
+        $blocks = [
+            "1Xnj47Xz7Ge2KlFA8FTA12nXW8fHZePvq4JH6ok7dQebD0KX4MkGGEN9XkoLTkzXsDBy1puBwqxogGTvRmSzZWGv963gjDPRp7CC",
+            "aw2JGuy4hgRMUfBSIovZA1rXhqjrc2Jj1mKPDcwtNlAMzPSRkuoak5BuZy5gJsoytM9dF3sl5EkVcpziO6tZtZz49eUr68HUScJ3",
+            "0514RTnenELwQNnV0tVTBekK3KAD10Olb3hpbwReMIFoW54EutYkGmQAimYHgIcNWx4rgZ2ZbyU39Y5YWG3QvGgj2b2Q2wK9DVwU",
+            "B2x0qBA9MQ86o2kz0H94jSp2UjyplrEp633CneTND84FHYgbK6NMexxnXy7frdASo5OJ826Gw72tG9JZYdinNJYqpmsZoihvE5g0",
+            "jA0zByoUUVf6gr4KjBymZtGoHArf5TlCmMOKnoaoxIU0wYLh3ZF2hiMvXvwvQLCut0H92eSQfQpvdnDram9n3JSAFnGLJvrHqtQ0",
+            "pFB4d5D2ik0IDnLpb8qPqB9fWjDEJrJMFWrYBwIvOwAdiQGPRd39nyTVUZ9CVhiOVTJEBt6JsEI5xPcYcPHocej95XtpOfDbT900",
+            "d2eRlYCVSyzgVRgbRNCV5otNvhjQULEFFayyg6eRiTYuPqok4DBc3vCDlSW4jG2v6kI6P9S1yxcp9kYf2Zj4O7L5Wp3fCbxblt3P",
+            "ynh9FTZOJ7rv805O42ti6SvT7v8kZZMJjbTub94XBt6wGGH0c3Wtv0QKAE3qjzzkYwfTowsnYtMZDtytFAcThAItj9J1a9TdnzOZ",
+            "7j6QFZ7RExqXO2Zzfqqx2sd9RwPyDLdZedZoK2gsUzvUd7BvGdlXZpzyXFjobDiwoXk3Viaku2ghsf3kGKft0oVCUTlvUZ9PiNqI"
+        ];
+
+        $resultado = check($blocks, $token);
+
+        $this->assertEquals(true, $resultado);
+
+    }
 
     public function testApi(): void
     {

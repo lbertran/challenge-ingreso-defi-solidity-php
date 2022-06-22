@@ -1,5 +1,5 @@
 <?php
-require_once('../vendor/autoload.php');
+
 use GuzzleHttp\Client;
 
 function check($blocks, $token){
@@ -44,7 +44,9 @@ function check($blocks, $token){
     
     $valido = validaEncoded($token, $encoded);
 
-    return ['valido'=>$valido, 'encoded'=>$encoded, 'arrayordenado'=>$arrayordenado, 'contllamados'=>$contllamados];
+    return $valido; 
+    
+    //return ['valido'=>$valido, 'encoded'=>$encoded, 'arrayordenado'=>$arrayordenado, 'contllamados'=>$contllamados];
 
     //return $arrayordenado;
 
