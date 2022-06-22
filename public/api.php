@@ -1,7 +1,7 @@
 <?php
 
 require_once('../vendor/autoload.php');
-use Symfony\Component\HttpClient\HttpClient;
+use GuzzleHttp\Client;
 
 if (isset($_GET['email']) && $_GET['email']!="") {
 	include('check.php');
@@ -27,48 +27,51 @@ function ordenador($email){
 
     $arrayordenado = check($blocks, $token);
 
-    return $arrayordenado;
+    return $arrayordenado; 
 }
 
 function getToken($email){
-    $API_URL = 'https://rooftop-career-switch.herokuapp.com/';
+    $API_URL = 'http://rooftop-career-switch.herokuapp.com/';
     $ENDPOINT = 'token';
 
-    $client = HttpClient::create([
-        'max_redirects' => 3,
+    $requestData = [
+        'query' => [
+            'email' => $email
+        ],
+    ];
+    
+    $client = new Client([
+        'base_uri' => $API_URL,
     ]);
     
-    $response = $client->request(
-        'GET',
-        $API_URL . $ENDPOINT,
-        [
-            'query' => ['email' => $email]
-        ]
-    );
+    $response = $client->request('GET', $API_URL . $ENDPOINT, $requestData);
     
-    return $response->toArray()['token'];
+    $json = $response->getBody()->getContents();
+
+    return json_decode($json)->token;
 
     
 }
 
 function getBlocks($token){
-    $API_URL = 'https://rooftop-career-switch.herokuapp.com/';
+    $API_URL = 'http://rooftop-career-switch.herokuapp.com/';
     $ENDPOINT = 'blocks';
 
-    $client = HttpClient::create([
-        'max_redirects' => 3,
+    $requestData = [
+        'query' => [
+            'token' => $token
+        ],
+    ];
+    
+    $client = new Client([
+        'base_uri' => $API_URL,
     ]);
     
-    $response = $client->request(
-        'GET',
-        $API_URL . $ENDPOINT,
-        [
-            'query' => ['token' => $token]
-        ]
-    );
+    $response = $client->request('GET', $API_URL . $ENDPOINT, $requestData);
     
-    return $response->toArray()['data'];
+    $json = $response->getBody()->getContents();
 
+    return json_decode($json)->data;
     
 }
 ?>
