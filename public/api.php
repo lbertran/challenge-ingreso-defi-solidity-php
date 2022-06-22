@@ -4,7 +4,7 @@ require_once('../vendor/autoload.php');
 use GuzzleHttp\Client;
 
 if (isset($_GET['email']) && $_GET['email']!="") {
-	include('check.php');
+	
 	$resp = ordenador($_GET['email']);
     response($resp);
 } else {
@@ -18,14 +18,20 @@ function response($response_desc){
 }
 
 function ordenador($email){
-
+    include('check.php');
+    include('servicio.php');
+   
     //$token  = "c7a041f1-351e-4f1f-81b1-04373d4a501d"; // fabiangomez@gmail.com
 
     $token = getToken($email);
 
     $blocks = getBlocks($token);
 
-    $arrayordenado = check($blocks, $token);
+    $servicio = new Servicio();
+
+    $check = new Check($servicio);
+
+    $arrayordenado = $check->check($blocks, $token);
 
     return $arrayordenado; 
 }
@@ -49,8 +55,6 @@ function getToken($email){
     $json = $response->getBody()->getContents();
 
     return json_decode($json)->token;
-
-    
 }
 
 function getBlocks($token){
@@ -72,6 +76,5 @@ function getBlocks($token){
     $json = $response->getBody()->getContents();
 
     return json_decode($json)->data;
-    
 }
 ?>
