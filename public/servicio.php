@@ -25,7 +25,7 @@ class Servicio {
         
         $json = $response->getBody()->getContents();
     
-        return json_decode($json)->message;
+        return boolval(json_decode($json)->message);
     }
 
     public function validaEncoded($token, $encoded){
@@ -47,7 +47,7 @@ class Servicio {
         
         $json = $response->getBody()->getContents();
     
-        return json_decode($json)->message;
+        return boolval(json_decode($json)->message);
     }
 
     

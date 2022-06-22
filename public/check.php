@@ -22,6 +22,7 @@ class Check{
             foreach ($blocks as $key => $block) {
                 if(!$chequeo){
                     $chequeo = $this->servicio->comparaValores($token, $arrayordenado[$pocisionbuscada-1],$block);
+                    
                     $contllamados += 1;
                     if($chequeo){
                         $arrayordenado[$pocisionbuscada] = $block;

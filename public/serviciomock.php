@@ -18,8 +18,7 @@ class Serviciomock {
         $response = $this->getMockedClient()->request('POST', '/check?token='.$token.'&blocks='.$primero.$segundo);
         
         $body     = (string) $response->getBody();
-        $message  = json_decode($body, true)['message'];
-        print_r( $message);
+        $message  = boolval(json_decode($body, true)['message']);
         return $message;
 
     }
@@ -27,7 +26,7 @@ class Serviciomock {
     public function validaEncoded($token, $encoded){
         $response = $this->getMockedClient()->request('POST', '/check?token='.$token.'&encoded='.$encoded);
         $body     = (string) $response->getBody();
-        $message  = json_decode($body, true)['message'];
+        $message  = boolval(json_decode($body, true)['message']);
         
         return $message;
     }
@@ -66,15 +65,6 @@ class Serviciomock {
                 ->withConditionalResponse('blocks=asdferty', new Response(200, [], '{"message":"true"}'))
                 ->withConditionalResponse('encoded=qwerzcvfuhgtasdferty', new Response(200, [], '{"message":"true"}'))
                 ->withDefaultResponse(new Response(200, [],'{"message":"false"}'))
-                ->build()
-        );
-
-        $handlerBuilder->addRoute(
-            $cb->new()
-                ->withMethod('GET')
-                ->withPath('/country/')
-                ->withConditionalResponse('code=de', new Response(200, [], '{"id":"+49","code":"DE","name":"Germany"}'))
-                ->withConditionalResponse('code=it', new Response(200, [], '{"id":"+39","code":"IT","name":"Italy"}'))
                 ->build()
         );
 
