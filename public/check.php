@@ -52,6 +52,16 @@ class Check{
         $valido = $this->servicio->validaEncoded($token, $encoded);
         return $valido;
     }
+
+    public function getToken($email){
+        $token = $this->servicio->getToken($email);
+        return $token;
+    }
+
+    public function getBlocks($token){
+        $blocks = $this->servicio->getBlocks($token);
+        return $blocks;
+    }
 }
 
 
