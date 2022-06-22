@@ -4,15 +4,13 @@ require_once('../vendor/autoload.php');
 use GuzzleHttp\Client;
 
 if (isset($_GET['email']) && $_GET['email']!="") {
-	
-	$resp = ordenador($_GET['email']);
-    response($resp);
+	$response = ordenador($_GET['email']);
+    response($response);
 } else {
 	response("Debe ingresar un email valido");
 }
 
-function response($response_desc){
-	$response = $response_desc;
+function response($response){
 	$json_response = json_encode($response);
 	echo $json_response;
 }

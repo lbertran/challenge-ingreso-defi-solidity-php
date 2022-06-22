@@ -1,6 +1,4 @@
 <?php
-
-
 class Check{
     private $servicio;
 

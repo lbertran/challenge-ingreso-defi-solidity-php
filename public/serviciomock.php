@@ -14,15 +14,11 @@ use PHPUnit\Framework\TestCase;
 class Serviciomock {
 
     public function comparaValores($token, $primero, $segundo){
-        
         $response = $this->getMockedClient()->request('POST', '/check?blocks='.$primero.$segundo);
-        
         $body     = (string) $response->getBody();
         $message  = json_decode($body, true)['message'] === 'true'? true: false;
         
-
         return $message;
-
     }
 
     public function validaEncoded($token, $encoded){

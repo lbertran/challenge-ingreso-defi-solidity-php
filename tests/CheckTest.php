@@ -24,9 +24,7 @@ class CheckTest extends TestCase{
         print_r($resultado);
         
         $this->assertEquals($expected, $resultado);
-
     }
-  
 }
 
 /*
