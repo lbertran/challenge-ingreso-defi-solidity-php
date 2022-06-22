@@ -5,7 +5,7 @@ En este repositorio se encuentra el código para ejecutar el Challenge Ingreso C
 
 Se compone de:
 
-- Función Check() que cumple con los requerimientos
+- Función check() que cumple con los requerimientos ubicada en public/check.php
 - API (GET) para probar la función de manera simple con algún cliente Http, como por ejemplo Postman
 
 ## Modo de uso de la API
