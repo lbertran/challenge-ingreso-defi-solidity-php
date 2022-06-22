@@ -33,7 +33,9 @@ function ordenador($email){
 
     $arrayordenado = $check->check($blocks, $token);
 
-    return $arrayordenado; 
+    $valido = $check->validate($arrayordenado, $token);
+
+    return ['valido'=> $valido, 'arrayordenado' => $arrayordenado]; 
 }
 
 function getToken($email){

@@ -38,7 +38,21 @@ class Check{
             $encoded .= $block;
         }
         $valido = $this->servicio->validaEncoded($token, $encoded);
-        return $valido; 
+        if($valido){
+            return $arrayordenado;
+        }else{
+            return 'No se pudo validar';
+        }
+         
+    }
+
+    public function validate($blocks,$token){
+        $encoded = '';
+        foreach ($blocks as $block) {
+            $encoded .= $block;
+        }
+        $valido = $this->servicio->validaEncoded($token, $encoded);
+        return $valido;
     }
 }
 

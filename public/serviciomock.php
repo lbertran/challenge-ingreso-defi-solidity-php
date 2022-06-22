@@ -15,10 +15,12 @@ class Serviciomock {
 
     public function comparaValores($token, $primero, $segundo){
         
-        $response = $this->getMockedClient()->request('POST', '/check?token='.$token.'&blocks='.$primero.$segundo);
+        $response = $this->getMockedClient()->request('POST', '/check?blocks='.$primero.$segundo);
         
         $body     = (string) $response->getBody();
-        $message  = boolval(json_decode($body, true)['message']);
+        $message  = json_decode($body, true)['message'] === 'true'? true: false;
+        
+
         return $message;
 
     }
@@ -26,7 +28,7 @@ class Serviciomock {
     public function validaEncoded($token, $encoded){
         $response = $this->getMockedClient()->request('POST', '/check?token='.$token.'&encoded='.$encoded);
         $body     = (string) $response->getBody();
-        $message  = boolval(json_decode($body, true)['message']);
+        $message  = json_decode($body, true)['message'] === 'true'? true: false;
         
         return $message;
     }
